@@ -1,7 +1,7 @@
 /// reference path="../node_modules/@types/jest/index.d.ts"
 import {Left, Right} from "../src/Either"
 
-test ("Left isLeft ", () =>{
+test ("Left isLeft ", () => {
     const either = Left<string, number>("error")
     expect(either.isLeft()).toBe(true)
 })
