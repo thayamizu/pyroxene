@@ -1,0 +1,37 @@
+{
+  "name": "pyroxene",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "tsc --p tsconfig.dev.json",
+    "build:prod": "tsc --p tsconfig.prod.json",
+    "test": "jest",
+    "doc": "typedoc --out ./docs ./src -m commonjs -t ES2017"
+  },
+  "author": "T.Hayamizu",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.5",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.4",
+    "typedoc": "^0.13.0",
+    "typescript": "^3.1.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "collectCoverage":true,
+    "coverageDirectory":"./build/coverage"
+  }
+}
