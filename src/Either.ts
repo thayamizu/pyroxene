@@ -8,7 +8,7 @@
  * @template U
  */
 export abstract class Either<T, U> {
-    protected _isLeft: boolean  = false
+    protected _isLeft: boolean = false;
 
     /**
      *
@@ -17,7 +17,7 @@ export abstract class Either<T, U> {
      * @returns {boolean}
      * @memberof Either
      */
-    public abstract isLeft(): boolean
+    public abstract isLeft(): boolean;
 
     /**
      *
@@ -26,7 +26,7 @@ export abstract class Either<T, U> {
      * @returns {boolean}
      * @memberof Either
      */
-    public abstract isRight(): boolean
+    public abstract isRight(): boolean;
 
     /**
      *
@@ -38,7 +38,7 @@ export abstract class Either<T, U> {
      * @returns {X}
      * @memberof Either
      */
-    public abstract fold<X>(failure: (t: T) => X, success: (u: U) => X): X
+    public abstract fold<X>(failure: (t: T) => X, success: (u: U) => X): X;
 
     /**
      *
@@ -49,7 +49,7 @@ export abstract class Either<T, U> {
      * @returns {Either<T, X>}
      * @memberof Either
      */
-    public abstract flatMap<X>(f: (value: U ) => Either<T, X> ): Either<T, X>
+    public abstract flatMap<X>(f: (value: U) => Either<T, X>): Either<T, X>;
 
     /**
      *
@@ -60,7 +60,7 @@ export abstract class Either<T, U> {
      * @returns {Either<T, X>}
      * @memberof Either
      */
-    public abstract map<X>(f: (value: U ) => X): Either<T, X>
+    public abstract map<X>(f: (value: U) => X): Either<T, X>;
 
     /**
      *
@@ -70,7 +70,7 @@ export abstract class Either<T, U> {
      * @returns {U}
      * @memberof Either
      */
-    public abstract getOrElse(defaultValue: U): U
+    public abstract getOrElse(defaultValue: U): U;
 }
 
 /**
@@ -140,9 +140,9 @@ class EitherImpl<T, U> extends Either<T, U> {
      * @memberof Either
      */
     public fold<X>(failure: (t: T) => X, success: (u: U) => X): X {
-        return (this.isLeft()) ?
-                failure(this.value as T) :
-                success(this.value as U)
+        return this.isLeft()
+            ? failure(this.value as T)
+            : success(this.value as U);
     }
 
     /**
@@ -152,10 +152,11 @@ class EitherImpl<T, U> extends Either<T, U> {
      * @returns {IEither<T, U>}
      * @memberof IEither
      */
-    public flatMap<X>(f: (value: U ) => Either<T, X> ): Either<T, X> {
+    public flatMap<X>(f: (value: U) => Either<T, X>): Either<T, X> {
         return this.fold(
-            (left)  => this as any as Either<T, X>,
-            (right) => f(right))
+            left => (this as any) as Either<T, X>,
+            right => f(right)
+        );
     }
 
     /**
@@ -166,11 +167,11 @@ class EitherImpl<T, U> extends Either<T, U> {
      * @returns {(T | U)}
      * @memberof Either
      */
-    public map<X>(f: (value: U) => X): Either<T, X>  {
+    public map<X>(f: (value: U) => X): Either<T, X> {
         return this.fold(
-            (left)  => this as any as Either<T, X>,
-            (right) => Right<T, X>(f(right)))
-
+            left => (this as any) as Either<T, X>,
+            right => Right<T, X>(f(right))
+        );
     }
 
     /**
@@ -181,9 +182,7 @@ class EitherImpl<T, U> extends Either<T, U> {
      * @memberof EitherImpl
      */
     public getOrElse(defaultValue: U): U {
-        return this.fold(
-            (left)  => defaultValue,
-            (right) => right)
+        return this.fold(left => defaultValue, right => right);
     }
 }
 
@@ -197,7 +196,7 @@ class EitherImpl<T, U> extends Either<T, U> {
  * @template U
  */
 export class RightProj<T, U> extends EitherImpl<T, U> {
-    protected _isLeft = false
+    protected _isLeft = false;
 
     /**
      *
@@ -217,7 +216,7 @@ export class RightProj<T, U> extends EitherImpl<T, U> {
  * @template U
  */
 export class LeftProj<T, U> extends EitherImpl<T, U> {
-    protected _isLeft = true
+    protected _isLeft = true;
 
     /**
      *
