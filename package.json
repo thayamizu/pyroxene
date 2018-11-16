@@ -31,7 +31,7 @@
       "json",
       "node"
     ],
-    "collectCoverage":true,
-    "coverageDirectory":"./build/coverage"
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage"
   }
 }
