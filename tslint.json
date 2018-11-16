@@ -1,13 +1,13 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-        "max-classes-per-file":false,
-        "variable-name":false,
-        "semicolon": false
-    },
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "max-classes-per-file": false,
+    "variable-name": false,
+    "semicolon": false,
+    "trailing-comma": false,
+    "arrow-parens": false
+  },
+  "rulesDirectory": []
 }
