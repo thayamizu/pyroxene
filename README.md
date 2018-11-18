@@ -13,22 +13,22 @@ A Monad like type library for TypeScript.
 
 ## Option
 
-Represents a option value. A Option instance can create Some or None function.
+Represents a option value. An instance of Option object is either a Some or None object.
 
 ```ts
-import { Some, None } from "../src/Either";
+import { Some, None } from "../src/Option";
 
 //create some
 const some = Some(10);
 
 //isDefined
-console.log(option.isDefined);
+console.log(some.isDefined);
 
 //isEmpty
-console.log(option.isEmpty);
+console.log(some.isEmpty);
 
 //getOrElse
-console.log(option.getOrElse(0));
+console.log(some.getOrElse(0));
 
 //fold
 some.fold<void>(
@@ -53,4 +53,40 @@ some.flatMap<string>(v => {
 
 ## Either
 
-The Either type represents values with two possibilities. A value of type Either<T, U> is either Left or Right.
+The Either type represents values with two possibilities. A value of type Either<T, U> is either Left T type or Right U type.
+
+```ts
+import { Left, Right } from "../src/Either";
+
+//create right
+const either = Right(10);
+
+//isLeft
+console.log(either.isLeft());
+
+//isRight
+console.log(either.isRight());
+
+//getOrElse
+console.log(either.getOrElse(0));
+
+//fold
+either.fold<void>(
+  () => {
+    //if option is empty then callback this func.
+  },
+  (v: number) => {
+    //if option is defined then call this func.
+  }
+);
+
+//map
+either.map<string>((v: number) => {
+  return v.toString();
+});
+
+//flatMap
+either.flatMap<string>(v => {
+  return Some(v.toString());
+});
+```
