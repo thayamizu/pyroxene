@@ -7,7 +7,7 @@
 
 # Description
 
-A Monad like type library for TypeScript.
+My Typescript Utility Library.
 
 # Usage
 
